@@ -2,7 +2,7 @@
 
 基于实验数据定位 LLM 推理性能回归。输入两个 Git 版本和同一份工作负载，得到回归判定、可疑提交范围、诊断证据和独立对照实验记录。
 
-[4 分钟参赛演示](https://devinhuang2001.github.io/RegressLens/#video) · [在线交互 Demo](https://devinhuang2001.github.io/RegressLens/report.html) · [项目简介](docs/SUBMISSION.md) · [完整展示包](docs/downloads/RegressLens-Showcase-Kit.zip)
+[在线交互 Demo](https://devinhuang2001.github.io/RegressLens/report.html) · [项目简介](docs/SUBMISSION.md) · [源码与 Colab Notebook 下载](docs/downloads/RegressLens-v0.2.1.zip)
 
 ![RegressLens 演示：性能总览、提交定位和 Profiling](docs/media/RegressLens-README.gif)
 
