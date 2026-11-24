@@ -1,0 +1,35 @@
+backend: guidellm
+case_type: hardware
+model: Qwen/Qwen2.5-0.5B-Instruct
+tokenizer: Qwen/Qwen2.5-0.5B-Instruct
+model_revision: 7ae557604adf67be50417f59c2c2f167def9a775
+tokenizer_revision: 7ae557604adf67be50417f59c2c2f167def9a775
+require_gpu: true
+rounds: 5
+gate_scenario: concurrent
+gate_metric: ttft_ms_p95
+warmup: true
+cooldown_seconds: 3
+time_budget_seconds: 3600
+slo:
+  ttft_ms: 1000
+  tpot_ms: 100
+scenarios:
+  - id: concurrent
+    prompt_tokens: 128
+    output_tokens: 32
+    concurrency: 8
+    requests: 80
+  - id: long-prompt
+    prompt_tokens: 512
+    output_tokens: 32
+    concurrency: 8
+    requests: 80
+# In managed mode, the build and command below are absolute paths to your
+# reviewed wrappers. Their working directory is the candidate worktree.
+# The launch wrapper must serve the candidate build and honor the model SHA.
+service:
+  target: http://127.0.0.1:18000
+  build: [/absolute/path/build-vllm-for-worktree]
+  command: [/absolute/path/serve-vllm-for-worktree]
+  probe: [/absolute/path/describe-worktree-runtime]

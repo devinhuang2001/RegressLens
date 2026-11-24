@@ -1,0 +1,20 @@
+backend: fixture
+case_type: controlled_fixture
+model: fixture-model
+tokenizer: fixture-tokenizer
+model_revision: fixture-v1
+tokenizer_revision: fixture-v1
+require_gpu: false
+cooldown_seconds: 0
+gate_scenario: long-prompt
+scenarios:
+  - id: short-prompt
+    prompt_tokens: 128
+    output_tokens: 32
+    concurrency: 8
+    requests: 64
+  - id: long-prompt
+    prompt_tokens: 1024
+    output_tokens: 32
+    concurrency: 8
+    requests: 64

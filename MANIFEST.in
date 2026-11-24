@@ -1,0 +1,3 @@
+include LICENSE README.md
+recursive-include src/regresslens/web *
+recursive-include third_party *.txt

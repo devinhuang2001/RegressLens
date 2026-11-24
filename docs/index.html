@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="RegressLens 推理性能回归调查，评审交互示例。">
+<title>RegressLens · DOAI 演示</title>
+<style>
+:root{--bg:#101528;--surface:#192340;--line:#36466f;--text:#f0f5ff;--muted:#becae1;--accent:#b6c5ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,sans-serif}
+main{max-width:1230px;margin:auto;padding:28px clamp(18px,4vw,58px) 48px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:17px}
+header strong{font-size:24px}header span{color:var(--muted);font-size:14px}
+.hero{display:grid;grid-template-columns:1fr 1.35fr;gap:28px;align-items:center;margin:42px 0 26px}
+h1{font-size:clamp(33px,4vw,60px);line-height:1.22;letter-spacing:-.03em;margin:0 0 14px}
+p{color:var(--muted);margin:0 0 14px}
+.shot{width:100%;border:1px solid var(--line);border-radius:13px;box-shadow:0 13px 40px #02051178}
+a{color:var(--accent)}.button{display:inline-flex;align-items:center;color:#121e3d;background:var(--accent);border-radius:7px;padding:9px 15px;text-decoration:none;font-weight:720}
+.result{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:22px 0}.result div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:15px}
+.result strong{display:block;font:720 clamp(21px,3vw,33px) ui-monospace,monospace}.result span{font-size:14px;color:var(--muted)}
+nav{display:flex;gap:11px;flex-wrap:wrap;margin:14px 0 27px}nav a{border:1px solid var(--line);border-radius:6px;padding:7px 12px;text-decoration:none}
+h2{font-size:23px;margin:0 0 8px}footer{margin-top:27px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted)}
+@media(max-width:800px){.hero{grid-template-columns:1fr;margin-top:27px}.result{grid-template-columns:1fr}.result div{padding:11px 13px}}
+</style>
+<main>
+<header><strong>RegressLens</strong><span>DOAI · v0.2.1</span></header>
+<section class="hero">
+ <div><h1>从推理变慢<br>到可验证的提交</h1>
+ <p>运行同负载的版本对照，定位可疑提交，用隔离回退验证，并把 Trace、火焰图和原始证据放进同一份报告。</p>
+ <a class="button" href="report.html">打开交互报告</a></div>
+ <img class="shot" src="dashboard.jpg" alt="受控案例的性能概览">
+</section>
+<h2>一次受控回归调查</h2>
+<div class="result">
+ <div><strong>+31.0%</strong><span>长输入负载 TTFT p95 退化</span></div>
+ <div><strong>465125fe</strong><span>定位到调度准入变更</span></div>
+ <div><strong>106.9 → 81.6</strong><span>隔离回退后的 TTFT p95（ms）</span></div>
+</div>
+<nav aria-label="报告章节">
+ <a href="report.html#commits">提交定位</a><a href="report.html#diagnosis">根因与回退</a>
+ <a href="report.html#profiling">Trace 与火焰图</a><a href="report.html#evidence">实验记录</a>
+</nav>
+<section id="video" aria-labelledby="video-heading">
+<h2 id="video-heading">4 分钟参赛演示</h2>
+<video controls preload="metadata" playsinline poster="dashboard.jpg" style="display:block;width:100%;max-width:1000px;border:1px solid var(--line);border-radius:12px;background:#070b16">
+  <source src="media/RegressLens-DOAI-4min.mp4" type="video/mp4">
+  <track kind="captions" label="中文" srclang="zh-CN" src="media/RegressLens-competition.vtt">
+</video>
+<p><a href="media/RegressLens-60s.mp4">60 秒短片</a> · <a href="downloads/RegressLens-Showcase-Kit.zip">完整展示包</a> · <a href="https://github.com/devinhuang2001/RegressLens">源码仓库</a></p>
+</section>
+<h2>提供给开发者和 Agent</h2>
+<p>v0.2.1 的 CLI 提供 19 个入口和版本化 JSON。可查询回归指标、读取 Profiling 数据、导出 HTML、JSON 和原始 Trace。</p>
+<footer>页面数值来自可复现的受控案例。真实 PyTorch CPU Trace 转换已验证，真实 vLLM GPU 采集待验收。</footer>
+</main>
